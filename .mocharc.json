@@ -1,0 +1,5 @@
+{
+  "spec": "dist/test/**/*[sS]pec.?(m)js",
+  "recursive": true,
+  "require": ["dist/test/hooks.js"]
+}
