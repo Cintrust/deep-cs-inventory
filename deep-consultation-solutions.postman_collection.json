@@ -1,0 +1,654 @@
+{
+	"info": {
+		"_postman_id": "30551323-0541-42c6-8f26-946095914291",
+		"name": "deep-consultation-solutions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "REGISTER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"simple\",\r\n    \"username\":\"james\",\r\n    \"name\":\"simple james\"\r\n}"
+						},
+						"url": {
+							"raw": "{{APP_URL}}/auth/register",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "REGISTER",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"simple\",\r\n    \"username\":\"james\",\r\n    \"name\":\"simple james\"\r\n}"
+								},
+								"url": {
+									"raw": "{{APP_URL}}/auth/register",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 17:52:53 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    if(pm.response.code===200){\r",
+									"        var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"        console.log(jsonData)\r",
+									"        let token = jsonData.auth;\r",
+									"         pm.collectionVariables.set(\"AUTH-TOKEN\", token);\r",
+									"       \r",
+									"       \r",
+									"        // console.log(pm.response.body)\r",
+									"    }\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"simple\",\r\n    \"username\":\"james\"\r\n}"
+						},
+						"url": {
+							"raw": "{{APP_URL}}/auth/login",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "LOGIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"simple\",\r\n    \"username\":\"james\"\r\n}"
+								},
+								"url": {
+									"raw": "{{APP_URL}}/auth/login",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ae-hiDzIoEPprxA2o6LA76AP+fDLDo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 17:59:24 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJqYW1lcyIsImlhdCI6MTYzNTA5ODM2NCwiZXhwIjo1MjM1MDk4MzY0fQ.FhvrOsNWMYMGGviv_Jpov2wykUCkHs2M4eFVncpqZ-w\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ITEMS",
+			"item": [
+				{
+					"name": "ADDITEMS",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// set random time\r",
+									"const rand = Math.round(Math.random()*1000_000)\r",
+									"pm.collectionVariables.set(\"EXPIRY\",+new Date + rand)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"expiry\": {{EXPIRY}},\r\n    \"quantity\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/items/{{ITEM}}/add",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"items",
+								"{{ITEM}}",
+								"add"
+							]
+						},
+						"description": "expiry : `Unix timestamp`\n\nquantity: `integer`"
+					},
+					"response": [
+						{
+							"name": "ADDITEMS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"expiry\": {{EXPIRY}},\r\n    \"quantity\": 300\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/items/{{ITEM}}/add",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"items",
+										"{{ITEM}}",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 18:11:16 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "ADDITEMS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"expiry\": {{EXPIRY}},\r\n    \"quantity\": {{$randomInt}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/items/{{ITEM}}/add",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"items",
+										"{{ITEM}}",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 18:18:58 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "SELLITEMS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":200\r\n}"
+						},
+						"url": {
+							"raw": "{{APP_URL}}/items/{{ITEM}}/sell",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"items",
+								"{{ITEM}}",
+								"sell"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SELLITEMS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quantity\":200\r\n}"
+								},
+								"url": {
+									"raw": "{{APP_URL}}/items/{{ITEM}}/sell",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"items",
+										"{{ITEM}}",
+										"sell"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 18:15:04 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "GETITEMS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/items/{{ITEM}}/quantity",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"items",
+								"{{ITEM}}",
+								"quantity"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GETITEMS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL}}/items/{{ITEM}}/quantity",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"items",
+										"{{ITEM}}",
+										"quantity"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"2a-p9oSdLL5Ajnwn9lYKP5A5isXJv0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Oct 2021 18:16:25 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"quantity\": 832,\n    \"validTill\": 1635099555000\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH-TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTH-TOKEN",
+			"value": ""
+		},
+		{
+			"key": "APP_URL",
+			"value": "https://deep-cs.herokuapp.com"
+		},
+		{
+			"key": "ITEM",
+			"value": "cake"
+		},
+		{
+			"key": "EXPIRY",
+			"value": ""
+		}
+	]
+}
