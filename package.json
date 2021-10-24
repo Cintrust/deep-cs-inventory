@@ -5,9 +5,9 @@
   "scripts": {
     "build": "tsc",
     "pretest": "npm run build",
-    "prestart": "npm run build",
     "start": "node ./dist/bin/www",
-    "test": "mocha --config=.mocharc.json"
+    "test": "mocha --config=.mocharc.json",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
