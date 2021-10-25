@@ -1,9 +1,9 @@
 import db from "../../db";
-import {loginUser, registerUser} from "../auth/authHelpers";
+import {registerUser} from "../auth/authHelpers";
 import {addItem, getItem} from "./itemHelpers";
 
 describe("Adding Items:", function () {
-    let token = ""
+    let token = "token"
     let password = "simple"
     let username = "trust"
     let item = "cake"
@@ -17,8 +17,8 @@ describe("Adding Items:", function () {
             name: `${password} ${username}`
         }).expect(201)
 
-        let res = await loginUser({username, password}).expect(200)
-        token = res.body.auth;
+        // let res = await loginUser({username, password}).expect(200)
+        // token = res.body.auth;
         // runs once before the first test in this block
     });
     it("Should fail when invalid parameters are supplied", async function () {
@@ -26,19 +26,21 @@ describe("Adding Items:", function () {
         let date = new Date();
         date.setMilliseconds(0);
         let expires = +date;
-        console.log({expires})
+        // console.log({expires})
         //invalid Token
-        await addItem({item, token:"rubbish"}, {expiry: expires, quantity: -2}).expect(401)
+        // await addItem({item, token:"rubbish"}, {expiry: expires, quantity: -2}).expect(401)
 
         //nagetive values
         await addItem({item, token}, {expiry: -expires, quantity: -2}).expect(422)
 
         // overflows
-        await addItem({item, token}, {expiry: Number.MAX_SAFE_INTEGER,
-            quantity: Number.MAX_SAFE_INTEGER+2000}).expect(422)
+        await addItem({item, token}, {
+            expiry: Number.MAX_SAFE_INTEGER,
+            quantity: Number.MAX_SAFE_INTEGER + 2000
+        }).expect(422)
 
         //missing values
-        await getItem({item:"fake", token}).expect(200, {quantity: 0, validTill: null})
+        await getItem({item: "fake", token}).expect(200, {quantity: 0, validTill: null})
 
     })
     it("Should pass when valid parameters are supplied", async function () {
@@ -52,7 +54,6 @@ describe("Adding Items:", function () {
         await getItem({item, token}).expect(200, {quantity: 60, validTill: expires + 10000})
 
     })
-
 
 
 })
