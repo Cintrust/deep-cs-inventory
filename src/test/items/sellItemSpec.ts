@@ -8,7 +8,7 @@ describe("Selling Items:", function () {
     let username = "trust"
     let item = "cake"
     let date = new Date();
-    date.setMilliseconds(0);
+    // date.setMilliseconds(0);
     let expires = +date + 2000000;
     before(async function () {
         this.timeout(5000)

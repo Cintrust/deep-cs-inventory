@@ -24,7 +24,7 @@ describe("Adding Items:", function () {
     it("Should fail when invalid parameters are supplied", async function () {
 
         let date = new Date();
-        date.setMilliseconds(0);
+        // date.setMilliseconds(0);
         let expires = +date;
         // console.log({expires})
         //invalid Token
@@ -46,7 +46,7 @@ describe("Adding Items:", function () {
     it("Should pass when valid parameters are supplied", async function () {
 
         let date = new Date();
-        date.setMilliseconds(0);
+        // date.setMilliseconds(0);
         let expires = +date;
         await addItem({item, token}, {expiry: expires + 20000, quantity: 20}).expect(201, {})
         await addItem({item, token}, {expiry: expires + 10000, quantity: 10}).expect(201, {})

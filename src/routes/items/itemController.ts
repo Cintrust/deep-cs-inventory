@@ -11,7 +11,7 @@ async function addItemController(req: express.Request, res: express.Response, _n
         date.setMilliseconds(0);
         await db.query("insert into items (`name`,`quantity`,`expires_at`,user_id) value (?,?,?,?)",
 
-            [req.params.item, req.body.quantity, date, user_id])
+            [req.params.item, req.body.quantity, +date, user_id])
 
         res.status(201).json({})
     } catch (e) {
@@ -116,7 +116,8 @@ async function getItemController(req: express.Request, res: express.Response, _n
 
         let response = {
             quantity: 0,
-            validTill: Date.parse(results[0]?.expires_at)
+            validTill: results[0]?.expires_at
+            // validTill: Date.parse(results[0]?.expires_at)
         }
 
         for (const result of results) {

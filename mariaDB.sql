@@ -7,7 +7,7 @@ create or replace table items
     `name`       varchar(100) not null,
     quantity   int          not null,
     user_id    int          not null,
-    expires_at timestamp    null
+    expires_at int unique    null
 );
 
 create or replace index user_id_name_index
