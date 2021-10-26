@@ -7,8 +7,9 @@ async function addItemController(req: express.Request, res: express.Response, _n
     try {
         // @ts-ignore
         const user_id = req.user.id
-        let date = new Date(req.body.expiry);
-        date.setMilliseconds(0);
+        let date = req.body.expiry;
+        // let date = new Date(req.body.expiry);
+        // date.setMilliseconds(0);
         await db.query("insert into items (`name`,`quantity`,`expires_at`,user_id) value (?,?,?,?)",
 
             [req.params.item, req.body.quantity, +date, user_id])
@@ -24,11 +25,12 @@ async function addItemController(req: express.Request, res: express.Response, _n
 async function sellItemController(req: express.Request, res: express.Response, _next: express.NextFunction) {
     let connection = await db.getConnection();
     try {
+        let date = + new Date()
         let sql = `select it.*
                    from items it
                    where it.user_id = ?
                      and it.name = ?
-                     and it.expires_at > NOW()
+                     and it.expires_at > ?
                      and quantity > 0
                      and it.expires_at <=
                          (
@@ -40,7 +42,7 @@ async function sellItemController(req: express.Request, res: express.Response, _
                                    from items
                                    where user_id = ?
                                      and name = ?
-                                     and expires_at > NOW()
+                                     and expires_at > ?
                                      and quantity > 0
                                    order by cumulative
                                        for
@@ -57,7 +59,7 @@ async function sellItemController(req: express.Request, res: express.Response, _
         // @ts-ignore
         const user_id = req.user.id
         await connection.beginTransaction()
-        let {results} = await connection.query(sql, [user_id, req.params.item, user_id, req.params.item, req.body.quantity])
+        let {results} = await connection.query(sql, [user_id, req.params.item,date, user_id, req.params.item,date, req.body.quantity])
         let soldOut = [];
 
         if (!results.length) {
@@ -108,15 +110,16 @@ async function sellItemController(req: express.Request, res: express.Response, _
 async function getItemController(req: express.Request, res: express.Response, _next: express.NextFunction) {
 
     try {
+        let date =  +new Date()
         // @ts-ignore
         const user_id = req.user.id
-        const {results} = await db.query("select quantity,expires_at from items where expires_at > NOW() and quantity > 0 and user_id=? and name= ? order by expires_at ",
-            [user_id, req.params.item])
+        const {results} = await db.query("select quantity,expires_at from items where expires_at > ? and quantity > 0 and user_id=? and name= ? order by expires_at ",
+            [date,user_id, req.params.item])
 
 
         let response = {
             quantity: 0,
-            validTill: results[0]?.expires_at
+            validTill: results[0]?.expires_at??null
             // validTill: Date.parse(results[0]?.expires_at)
         }
 
